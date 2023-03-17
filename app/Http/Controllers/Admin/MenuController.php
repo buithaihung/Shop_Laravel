@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Menu\CreateFormRequest;
 use App\Http\Services\Menu\MenuService;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 
@@ -32,6 +33,18 @@ class MenuController extends Controller
             'title' => 'Danh sách danh mục',
             'menus' => $this->menuService->getAll(),
         ]);
+    }
+    public function  show(Menu $menu) {
+        return view('admin.menu.edit', [
+            'title' => ' Chỉnh Sửa Danh mục '  . $menu->name,
+            'menu' => $menu,
+            'menus' => $this->menuService->getAll(),
+        ]);
+    }
+    public function update(Menu $menu,CreateFormRequest $request) {
+        $this->menuService->update($request, $menu);
+
+        return redirect('/admin/menus/list');
     }
     public function destroy(Request $request) {
         $result = $this->menuService->destroy($request);
