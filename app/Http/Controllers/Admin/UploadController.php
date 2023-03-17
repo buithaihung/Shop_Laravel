@@ -15,10 +15,16 @@ class UploadController extends Controller
         $this->upload = $upload;
     }
     public function store(Request $request) {
-        if ($request->hasFile('file')) {
+        $url = $this->upload->store($request);
 
-            return "File đã được upload";
+        if($url != false) {
+            return response()->json([
+                'error' => false,
+                'url' => $url
+            ]);
         }
-        return "Lỗi upload";
+        return response()->json([
+            'error' => true
+        ]);
     }
 }
