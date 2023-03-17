@@ -65,7 +65,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Tạo Danh Mục</button>
+                <button type="submit" class="btn btn-primary">Tạo Sản Phẩm</button>
             </div>
         @csrf
     </form>
