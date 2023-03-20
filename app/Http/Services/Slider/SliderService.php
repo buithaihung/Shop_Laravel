@@ -24,4 +24,17 @@ class SliderService {
     public function get() {
         return Slider::orderByDesc('id')->paginate(15);
     }
+
+    public function update($request, $slider) {
+        try {
+           $slider->fill($request->input());
+           $slider->save();
+           Session::flash('success','Cập Nhật Thành Công');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Cập Nhật Lỗi');
+            Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+    }
 }
