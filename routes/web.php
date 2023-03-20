@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\Admin\SliderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +37,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}',[ProductController::class,'show']);
             Route::post('edit/{product}',[ProductController::class,'update']);
             Route::DELETE('destroy',[ProductController::class,'destroy']);
+        });
+
+        #sliders
+        Route::prefix('sliders')->group(function() {
+            Route::get('add',[SliderController::class, 'create']);
+            Route::post('add',[SliderController::class,'store']);
+            Route::get('list',[SliderController::class, 'index']);
+            Route::get('edit/{product}',[SliderController::class,'show']);
+            Route::post('edit/{product}',[SliderController::class,'update']);
+            Route::DELETE('destroy',[SliderController::class,'destroy']);
         });
 
         #Upload
