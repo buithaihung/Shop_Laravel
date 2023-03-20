@@ -61,4 +61,18 @@ class SliderController extends Controller
         }
         return redirect()->back();
     }
+
+    public function destroy(Request $request) {
+        $result = $this->slider->destroy($request);
+
+        if($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xoá thành công'
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
+    }
 }
